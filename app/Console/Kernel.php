@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -31,11 +31,18 @@ class Kernel extends ConsoleKernel
 
 
         $schedule->call(function () {
-            $moyo = new Moyo();
-            $data = $moyo->getData();
-            $cats = $moyo->getCategories($data);
+//            $moyo = new Moyo();
+//            $data = $moyo->getData();
+//            $cats = $moyo->getCategories($data);
+            $cats = [
+                [
+                    "parent_id" => 3317,
+                    "category_id" => 2784,
+                    "description" => "МФУ"
+                ]
+            ];
             DB::table('categories')->insertOrIgnore($cats);
-        })->dailyAt('22:00');
+        })->everyMinute();/*->dailyAt('22:00');*/
 
 
     }
@@ -47,7 +54,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
