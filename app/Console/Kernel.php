@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
+            set_time_limit(600);
             $moyo = new Moyo();
             $data = $moyo->getData();
             $cats = $moyo->getCategories($data);
