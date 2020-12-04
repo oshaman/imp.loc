@@ -26,24 +26,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-//        $schedule->call('\Fresh\Medpravda\Repositories\SitemapRepository@getMedicines')->dailyAt('01:30');
-
-
         $schedule->call(function () {
-//            $moyo = new Moyo();
-//            $data = $moyo->getData();
-//            $cats = $moyo->getCategories($data);
-            $cats = [
-                [
-                    "parent_id" => 3317,
-                    "category_id" => 2784,
-                    "description" => "МФУ"
-                ]
-            ];
+            $moyo = new Moyo();
+            $data = $moyo->getData();
+            $cats = $moyo->getCategories($data);
             DB::table('categories')->insertOrIgnore($cats);
-        })->everyMinute();/*->dailyAt('22:00');*/
 
+            $offers = $moyo->getOffers($data);
+            foreach (array_chunk($offers, 3000) as $value) {
+                DB::table('products')->insertOrIgnore($value);
+            }
+        })->dailyAt('01:00');
 
     }
 
