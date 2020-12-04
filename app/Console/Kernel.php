@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Moyo;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +27,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+//        $schedule->call('\Fresh\Medpravda\Repositories\SitemapRepository@getMedicines')->dailyAt('01:30');
+
+
+        $schedule->call(function () {
+            $moyo = new Moyo();
+            $data = $moyo->getData();
+            $cats = $moyo->getCategories($data);
+            DB::table('categories')->insertOrIgnore($cats);
+        })->dailyAt('21:40');
+
+
     }
 
     /**
