@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
             $data = $moyo->getData();
             $cats = $moyo->getCategories($data);
             DB::table('categories')->insertOrIgnore($cats);
-        })->dailyAt('21:55');
+        })->dailyAt('22:00');
 
 
     }
