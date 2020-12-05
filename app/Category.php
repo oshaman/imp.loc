@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $category_id;
-    public $parent_id;
-    public $description;
-
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'category_id')->with(['children']);
