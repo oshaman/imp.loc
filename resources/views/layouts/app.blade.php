@@ -90,95 +90,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- start content -->
 <div class="container">
 
-    <div class="women-product">
-        <div class=" w_content">
-            <div class="women">
-                <a href="#"><h4>Enthecwear - <span>4449 itemms</span> </h4></a>
-                <ul class="w_nav">
-                    <li>Sort : </li>
-                    <li><a class="active" href="#">popular</a></li> |
-                    <li><a href="#">new </a></li> |
-                    <li><a href="#">discount</a></li> |
-                    <li><a href="#">price: Low High </a></li>
-                    <div class="clearfix"> </div>
-                </ul>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-        <!-- grids_of_4 -->
-        <div class="grid-product">
-            @foreach ($products as $product)
-                <div class="grid-product">
-                    <div class="  product-grid">
-                        <div class="content_box"><a href="single.html">
-                                <div class="left-grid-view grid-view-left">
-{{--                                    <img src="{{ asset('assets') }}/images/pic13.jpg" class="img-responsive watch-right" alt=""/>--}}
-                                    <img src="{{ $product->picture }}" class="img-responsive watch-right new" alt=""/>
-                                    <div class="mask">
-                                        <div class="info">Quick View</div>
-                                    </div>
-                                    </div>
-                            </a>
-                        </div>
-                        <h4><a href="{{ $product->url }}">{{ str_replace("\xc2\xa0",' ',$product->description) }}</a></h4>
-                        <p>{!! $product->stock !!}</p>
-                        $ {{ $product->price }}
-                    </div>
-                </div>
-            @endforeach
-<div class="clearfix"> </div>
-</div>
-</div>
+    @yield('content')
 <div class="sub-cate">
     <div class=" top-nav rsidebar span_1_of_left">
         <h3 class="cate">CATEGORIES</h3>
-        <ul class="menu">
-            <li class="item1"><a href="#">Curabitur sapien<img class="arrow-img" src="{{ asset('assets') }}/images/arrow1.png" alt=""/> </a>
-                <ul class="cute">
-                    <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                    <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                    <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                </ul>
-            </li>
-            <li class="item2"><a href="#">Dignissim purus <img class="arrow-img " src="{{ asset('assets') }}/images/arrow1.png" alt=""/></a>
-                <ul class="cute">
-                    <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                    <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                    <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                </ul>
-            </li>
-            <li class="item3"><a href="#">Ultrices id du<img class="arrow-img img-arrow" src="{{ asset('assets') }}/images/arrow1.png" alt=""/> </a>
-                <ul class="cute">
-                    <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                    <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                    <li class="subitem3"><a href="product.html">Automatic Fails</a></li>
-                </ul>
-            </li>
-            <li class="item4"><a href="#">Cras iacaus rhone <img class="arrow-img img-left-arrow" src="{{ asset('assets') }}/images/arrow1.png" alt=""/></a>
-                <ul class="cute">
-                    <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                    <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                    <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                </ul>
-            </li>
-            <li>
-                <ul class="kid-menu">
-                    <li><a href="product.html">Tempus pretium</a></li>
-                    <li ><a href="product.html">Dignissim neque</a></li>
-                    <li ><a href="product.html">Ornared id aliquet</a></li>
-                </ul>
-            </li>
-            <ul class="kid-menu ">
-                <li><a href="product.html">Commodo sit</a></li>
-                <li ><a href="product.html">Urna ac tortor sc</a></li>
-                <li><a href="product.html">Ornared id aliquet</a></li>
-                <li><a href="product.html">Urna ac tortor sc</a></li>
-                <li ><a href="product.html">Eget nisi laoreet</a></li>
-                <li><a href="product.html">Faciisis ornare</a></li>
-                <li class="menu-kid-left"><a href="contact.html">Contact us</a></li>
-            </ul>
-
-        </ul>
+        @yield('categories')
     </div>
     <!--initiate accordion-->
     <script type="text/javascript">

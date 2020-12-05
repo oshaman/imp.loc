@@ -1,15 +1,18 @@
-<div class="grid-product">
-    <div class="  product-grid">
-        <div class="content_box"><a href="single.html">
-                <div class="left-grid-view grid-view-left">
-                    <img src="{{ asset('assets') }}/images/pic13.jpg" class="img-responsive watch-right" alt=""/>
-                    <div class="mask">
-                        <div class="info">Quick View</div>
+@foreach ($products as $product)
+    <div class="grid-product">
+        <div class="  product-grid">
+            <div class="content_box"><a href="single.html">
+                    <div class="left-grid-view grid-view-left">
+                        <img src="{{ $product->picture }}" class="img-responsive watch-right new" alt=""/>
+                        <div class="mask">
+                            <div class="info">Quick View</div>
+                        </div>
                     </div>
-            </a>
+                </a>
+            </div>
+            <h4><a href="{{ $product->url }}">{{ str_replace("\xc2\xa0",' ',$product->description) }}</a></h4>
+            <p>{!! $product->stock !!}</p>
+            &#x20b4; {{ $product->price }}
         </div>
-        <h4><a href="#"> Duis autem</a></h4>
-        <p>It is a long established fact that a reader</p>
-        Rs. 499
     </div>
-</div>
+@endforeach

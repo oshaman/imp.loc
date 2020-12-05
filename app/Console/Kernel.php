@@ -42,8 +42,8 @@ class Kernel extends ConsoleKernel
                     DB::table('products')->insertOrIgnore($value);
                 }
             })->dailyAt('01:00');
-        } catch (Exception $exceptione) {
-            Log::info('Ошибка ======> ' . $exceptione);
+        } catch (Exception $exception) {
+            Log::info('Ошибка ======> ' . $exception->getMessage());
         }
 
     }

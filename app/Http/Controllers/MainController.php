@@ -2,23 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Moyo;
-use App\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class MainController extends Controller
 {
-    public function index()
+    protected $product_repo;
+
+    public function __construct(ProductRepository $productRepository)
     {
+        $this->product_repo = $productRepository;
+    }
+
+    public function index(Request $request, Category $category)
+    {
+        $categories = Category::where(['parent_id' => 0])->with('children')->get();
+//        dd($category->category_id);
         $seo = 'testttt';
 
-        $products = Product::skip(584)->take(9)->get();
+        $products = $this->product_repo->getProducts(['category' => $category]);
 
-//        dd($products);
-
-//        $products = [1,2,3,4,5,6,7,8,9];
-        return view('main.index')->with(compact('products', 'seo'));
+        return view('main.index')->with(compact('products', 'seo', 'categories'));
     }
 
 
@@ -26,23 +35,26 @@ class MainController extends Controller
     {
         $start = microtime(1);
 
-        $moyo = new Moyo();
+        try {
+            $moyo = new Moyo();
 
-        $data = $moyo->getData();
+            $data = $moyo->getData();
 
-//        $cats = $moyo->getCategories($data);
-        $offers = $moyo->getOffers($data);
+//            $cats = $moyo->getCategories($data);
+            $offers = $moyo->getOffers($data);
 
-//        DB::table('categories')->insertOrIgnore($cats);
+//            DB::table('categories')->insertOrIgnore($cats);
 
-        foreach (array_chunk($offers, 3000) as $value) {
-            DB::table('products')->insertOrIgnore($value);
+            foreach (array_chunk($offers, 3000) as $value) {
+                DB::table('products')->insertOrIgnore($value);
+            }
+
+            $stop = microtime(1);
+            Log::info('time ====+++++++++==> ' . ($stop - $start) . PHP_EOL);
+
+        } catch (\Exception $exception) {
+            var_dump($exception->getMessage());
         }
-
-
-        $stop = microtime(1);
-
-        dd(($stop - $start), $offers);
     }
 
 
