@@ -22,7 +22,6 @@ class MainController extends Controller
     public function index(Request $request, Category $category)
     {
         $categories = Category::where(['parent_id' => 0])->with('children')->get();
-//        dd($category->category_id);
         $seo = 'testttt';
 
         $products = $this->product_repo->getProducts(['category' => $category]);

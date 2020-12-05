@@ -35,7 +35,11 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
         Route::bind('category', function ($value, \Illuminate\Routing\Route $route) {
-            return Category::where('category_id', $value)->first();
+            $category = Category::where('category_id', $value)->first();
+            if (empty($category)) {
+                abort(404);
+            }
+            return $category;
         });
     }
 
