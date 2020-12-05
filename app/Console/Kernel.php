@@ -6,6 +6,8 @@ use App\Moyo;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,18 +28,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            set_time_limit(600);
-            $moyo = new Moyo();
-            $data = $moyo->getData();
-            $cats = $moyo->getCategories($data);
-            DB::table('categories')->insertOrIgnore($cats);
+        try {
+            $schedule->call(function () {
+                set_time_limit(600);
+                $moyo = new Moyo();
+                $data = $moyo->getData();
+                $cats = $moyo->getCategories($data);
+                DB::table('categories')->insertOrIgnore($cats);
 
-            $offers = $moyo->getOffers($data);
-            foreach (array_chunk($offers, 3000) as $value) {
-                DB::table('products')->insertOrIgnore($value);
-            }
-        })->dailyAt('01:00');
+                $offers = $moyo->getOffers($data);
+                foreach (array_chunk($offers, 3000) as $value) {
+                    DB::table('products')->insertOrIgnore($value);
+                }
+            })->hourly();
+        } catch (Exception $exceptione) {
+            Log::info('Ошибка ======> ' . $exceptione);
+        }
 
     }
 
