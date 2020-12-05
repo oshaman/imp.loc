@@ -36,7 +36,6 @@ class Kernel extends ConsoleKernel
                 $data = $moyo->getData();
 //                $cats = $moyo->getCategories($data);
 //                DB::table('categories')->insertOrIgnore($cats);
-
                 Product::query()->truncate();
                 $offers = $moyo->getOffers($data);
                 foreach (array_chunk($offers, 3000) as $value) {
