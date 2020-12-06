@@ -1,3 +1,3 @@
 <div class="products pagination">
-    <?php echo $products->render(); ?>
+    {!! $products->render() !!}
 </div>
