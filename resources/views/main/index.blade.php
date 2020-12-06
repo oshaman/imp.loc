@@ -19,11 +19,13 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        <!-- grids_of_4 -->
+    @include('main.pagination', ['some' => 'data'])
+    <!-- grids_of_4 -->
         <div class="grid-product">
             @include('main.product', ['some' => 'data'])
             <div class="clearfix"></div>
         </div>
+        @include('main.pagination', ['some' => 'data'])
     </div>
 @endsection
 @section('categories')

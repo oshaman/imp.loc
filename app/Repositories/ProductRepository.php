@@ -37,7 +37,7 @@ class ProductRepository
             $query->whereIn('category_id', $ids);
         }
 
-        $products = $query->get();
+        $products = $query->paginate(10);
 
         return $products;
     }

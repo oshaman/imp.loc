@@ -12,7 +12,11 @@
             </div>
             <h4><a href="{{ $product->url }}">{{ str_replace("\xc2\xa0",' ',$product->description) }}</a></h4>
             <p>{!! $product->stock !!}</p>
-            &#x20b4; {{ $product->price }}
+            <div class="dolor-grid">
+                <span class="actual">&#x20b4; {{ $product->viewPrice }}</span>
+                <span class="reducedfrom">{{ $product->viewPrice }}</span>
+                @include('main.raiting')
+            </div>
         </div>
     </div>
 @endforeach

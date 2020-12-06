@@ -1,13 +1,7 @@
-<!--A Design by W3layouts 
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Product :: w3layouts</title>
+    <title>{{ $seo->title }}</title>
     <link href="{{ asset('assets') }}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!--theme-style-->
     <link href="{{ asset('assets') }}/css/style.css" rel="stylesheet" type="text/css" media="all" />

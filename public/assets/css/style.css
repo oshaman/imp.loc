@@ -473,6 +473,7 @@ span.reducedfrom {
 	font-size:1.1em; 
 }
 span.actual {
+	display: block;
 	font-weight: 500; 
 	color:#1DBAA5;
     font-weight: 700; 
@@ -1716,3 +1717,8 @@ img.banner-bag {
 	padding: 0 0 0 6.2em;
 }
 }
+
+.products.pagination{
+	border: none;
+}
+
