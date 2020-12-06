@@ -28,7 +28,7 @@ class ProductRepository
     {
         $category = $params['category'];
 
-        $query = Product::take(9);
+        $query = Product::select('*');
 
         if (!is_null($category->category_id)) {
             $category = $category->load('children');
