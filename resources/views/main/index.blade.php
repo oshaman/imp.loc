@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('head')
+    @include('main.head', ['some' => 'data'])
+@endsection
+
+@section('head')
+    @include('main.header', ['some' => 'data'])
+@endsection
+
 @section('content')
     <div class="women-product">
         <div class=" w_content">
@@ -32,4 +40,8 @@
     <ul class="menu">
         @include('main.category', ['categories' => $categories])
     </ul>
+@endsection
+
+@section('footer')
+    @include('main.footer')
 @endsection

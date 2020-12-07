@@ -6,6 +6,7 @@ use App\Category;
 use App\Moyo;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -21,7 +22,9 @@ class MainController extends Controller
 
     public function index(Request $request, Category $category)
     {
-        $categories = Category::where(['parent_id' => 0])->with('children')->get();
+        $categories = Cache::rememberForever('users', function () {
+            return Category::where(['parent_id' => 0])->with('children')->get();
+        });
         $seo = (object)[
             'title' => 'Shop'
         ];
