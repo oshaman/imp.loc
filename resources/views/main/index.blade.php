@@ -4,7 +4,7 @@
     @include('main.head', ['some' => 'data'])
 @endsection
 
-@section('head')
+@section('header')
     @include('main.header', ['some' => 'data'])
 @endsection
 
