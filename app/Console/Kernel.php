@@ -41,7 +41,8 @@ class Kernel extends ConsoleKernel
                 foreach (array_chunk($offers, 3000) as $value) {
                     DB::table('products')->insertOrIgnore($value);
                 }
-            })->dailyAt('01:00');
+            })->twiceDaily(1, 13);
+            Log::info('Import success ======> ' . date('H:i') . PHP_EOL);
         } catch (Exception $exception) {
             Log::info('Ошибка ======> ' . $exception->getMessage());
         }
