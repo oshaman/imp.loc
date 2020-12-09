@@ -1,7 +1,8 @@
 @foreach ($products as $product)
     <div class="grid-product">
         <div class="  product-grid">
-            <div class="content_box"><a href="single.html">
+            <div class="content_box">
+                <a href="{{ $product->url }}">
                     <div class="left-grid-view grid-view-left">
                         <img src="{{ $product->picture }}" class="img-responsive watch-right new" alt=""/>
                         <div class="mask">
