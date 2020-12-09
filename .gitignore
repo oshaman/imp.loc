@@ -20,3 +20,4 @@ server.php
 /.idea
 /storage
 /tests
+composer.lock

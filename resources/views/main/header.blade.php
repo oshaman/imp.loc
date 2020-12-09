@@ -38,12 +38,13 @@
         <div class="container">
             <div class="header-bottom-left">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('assets') }}/images/logo.png" alt=" " /></a>
+                    <a href="/"><img src="{{ asset('assets') }}/images/logo.png" alt=" " /></a>
                 </div>
                 <div class="search">
-                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    {!! Form::open(['url' => '/', 'method' => 'get']) !!}
+                    <input name="search_product" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
                     <input type="submit"  value="SEARCH">
-
+                    {!! Form::close() !!}
                 </div>
                 <div class="clearfix"> </div>
             </div>

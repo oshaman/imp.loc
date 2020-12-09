@@ -29,7 +29,8 @@ class MainController extends Controller
             'title' => 'Shop'
         ];
 
-        $products = $this->product_repo->getProducts(['category' => $category]);
+        $products = $this->product_repo->getProducts($request, ['category' => $category]);
+        $products = $products->appends($request->input());
 
         return view('main.index')->with(compact('products', 'seo', 'categories'));
     }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{category?}', 'MainController@index')->name('products')->where(['category' => '[0-9]+']);
+Route::match(['get'],'/{category?}', 'MainController@index')->name('products')->where(['category' => '[0-9]+']);
 
 
 //Route::get('main', 'MainController@importTest')->name('main');

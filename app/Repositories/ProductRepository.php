@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Category;
 use App\Product;
+use Illuminate\Http\Request;
 
 class ProductRepository
 {
@@ -24,18 +25,30 @@ class ProductRepository
      * @param array $params
      * @return Product
      */
-    public function getProducts($params)
+    public function getProducts(Request $request, $params)
     {
         $category = $params['category'];
 
         $query = Product::select('*');
 
+        if ($request->has('search_product')) {
+            $re = '#[^\w\'\sа-яА-ЯёЁіІїЇЄє\-]+#u';
+
+            $string = preg_replace($re, '', $request->get('search_product'));
+            $string = substr(preg_replace('#[\s{2,}]#', ' ', $string), 0, 96);
+            $query->where('description', 'like', '%' . $string . '%');
+        }
+
         if (!is_null($category->category_id)) {
             $category = $category->load('children');
             $ids = $this->getCategoriesId($category);
-
             $query->whereIn('category_id', $ids);
         }
+
+        if ($request->has('sort_by')) {
+            $query->orderBy('price');
+        }
+
 
         $products = $query->paginate(10);
 

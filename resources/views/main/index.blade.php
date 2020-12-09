@@ -12,7 +12,7 @@
     <div class="women-product">
         <div class=" w_content">
             <div class="women">
-                <a href="#"><h4>Enthecwear - <span>4449 itemms</span></h4></a>
+                <a href="#"><h4>Найдено - <span>{{ $products->total() }} товаров</span></h4></a>
                 <ul class="w_nav">
                     <li>Sort :</li>
                     <li><a class="active" href="#">popular</a></li>
@@ -21,7 +21,11 @@
                     |
                     <li><a href="#">discount</a></li>
                     |
-                    <li><a href="#">price: Low High </a></li>
+                    <li>
+                        <a href="{{ url()->current().'?'.http_build_query(array_merge(request()->all(),['sort_by' => "price"])) }}">
+                            "По цене"
+                        </a>
+                    </li>
                     <div class="clearfix"></div>
                 </ul>
                 <div class="clearfix"></div>
