@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        try {
-            $schedule->call(function () {
+        $schedule->call(function () {
+            try {
                 set_time_limit(600);
                 $moyo = new Moyo();
                 $data = $moyo->getData();
@@ -41,11 +41,12 @@ class Kernel extends ConsoleKernel
                 foreach (array_chunk($offers, 3000) as $value) {
                     DB::table('products')->insertOrIgnore($value);
                 }
-            })->twiceDaily(1, 13);
-            Log::info('Import success ======> ' . date('H:i') . PHP_EOL);
-        } catch (Exception $exception) {
-            Log::info('Ошибка ======> ' . $exception->getMessage());
-        }
+                Log::info('Import success ======> ' . date('H:i') . PHP_EOL);
+            } catch (Exception $exception) {
+                Log::info('Ошибка ======> ' . $exception->getMessage());
+            }
+        })->twiceDaily(1, 13);
+
 
     }
 
